@@ -1,0 +1,11 @@
+1. Perbedaan Persebaran Nilai Keabuan
+Persebaran nilai keabuan dapat dilihat melalui bentuk histogram dari masing-masing citra: 
+* Citra Asli: Histogram menunjukkan distribusi intensitas cahaya asli dari gambar yang diambil. Jika gambar memiliki kontras rendah atau cenderung gelap, maka persebaran nilai keabuan akan menumpuk di area nilai piksel rendah. 
+* Citra Negatif: Nilai keabuan pada citra ini merupakan hasil dari rumus G = 255 - F. Secara visual, histogramnya adalah kebalikan (inversi) dari citra asli. Area yang tadinya memiliki banyak piksel terang akan bergeser menjadi gelap, dan sebaliknya, namun bentuk distribusinya tetap identik hanya saja posisinya yang terpental (mirroring). 
+* Citra Logaritmik: Berdasarkan rumus G = c ×log(1+F), transformasi ini memperluas rentang nilai piksel rendah (gelap) dan memampatkan nilai piksel tinggi (terang). Hal ini menyebabkan persebaran nilai keabuan pada histogram cenderung bergeser ke arah kanan atau lebih merata di area terang, sehingga detail pada area gelap menjadi lebih terlihat jelas. 
+
+2. Kapan Transformasi Logaritmik Lebih Bermanfaat?
+Transformasi logaritmik lebih bermanfaat dibandingkan transformasi negatif dalam kondisi berikut: 
+* Citra dengan Rentang Dinamis Tinggi: Jika sebuah citra memiliki rentang nilai intensitas yang sangat besar (seperti pada spektrum Fourier), mata manusia tidak akan bisa melihat detail kecil di area gelap. Transformasi logaritmik membantu memampatkan rentang nilai tersebut sehingga detail yang tersembunyi menjadi tampak. 
+* Citra yang Sangat Gelap (Underexposed): Ketika citra didominasi oleh warna hitam atau abu-abu gelap, transformasi logaritmik akan "mengangkat" intensitas piksel tersebut secara non-linear, sehingga informasi di area bayangan lebih mudah dianalisa dibandingkan hanya sekadar membaliknya menjadi negatif. 
+* Kebutuhan Penajaman Detail Area Gelap: Transformasi negatif hanya membalik warna (hitam jadi putih), sedangkan logaritmik secara fungsional meningkatkan kontras pada area gelap secara spesifik tanpa menghilangkan seluruh informasi pada area terang.
