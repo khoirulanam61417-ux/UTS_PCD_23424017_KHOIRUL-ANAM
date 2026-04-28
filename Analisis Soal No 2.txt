@@ -1,0 +1,30 @@
+Analisis Soal No. 2: Konvolusi dan Filter Spasial
+1. Perbandingan Hasil Visual dan Nilai Piksel Rata-Rata
+Berdasarkan penerapan ketiga filter pada citra yang sama, berikut adalah perbandingannya:
+a) Low Pass Filter (LPF):
+
+* Hasil Visual: Citra terlihat lebih halus atau kabur (blur). Noise pada citra berkurang karena filter ini meratakan intensitas piksel dengan tetangganya. 
+* Nilai Piksel Rata-rata: Nilai rata-rata cenderung stabil atau tetap (hampir sama dengan citra asli) karena kernel LPF (1/9 ×semua elemen 1}) menjaga jumlah energi/intensitas total dalam citra. 
+
+b) High Pass Filter (HPF):
+
+* Hasil Visual: Citra tampak gelap dengan garis-garis terang yang menonjolkan tepi objek (edge detection). Detail latar belakang yang rata akan hilang. 
+* Nilai Piksel Rata-rata: Nilai rata-rata akan menurun drastis mendekati nol. Hal ini terjadi karena jumlah total koefisien dalam kernel HPF adalah $0$ (contoh: $8$ dikurangi delapan angka -1), sehingga area dengan intensitas seragam akan menghasilkan output nol. 
+
+c) Band Pass Filter (BPF/Sharpening):
+
+* Hasil Visual: Citra terlihat lebih tajam (sharper) dibandingkan aslinya. Tepi objek lebih kontras namun tetap mempertahankan bentuk objek asli (tidak sehitam HPF). 
+* Nilai Piksel Rata-rata: Nilai rata-rata cenderung meningkat sedikit atau tetap, tergantung pada konstanta penajaman yang digunakan (pada kernel ini, nilai tengah adalah 5), yang memperkuat perbedaan intensitas piksel pusat terhadap tetangganya. 
+
+2. Hubungan Antara Domain Spasial dan Domain Frekuensi
+Proses konvolusi yang dilakukan di domain spasial (manipulasi langsung pada piksel) memiliki kaitan erat dengan representasi citra di domain frekuensi (seberapa cepat intensitas piksel berubah):
+1. Low Pass Filter (LPF):
+* Domain Spasial: Melakukan rata-rata (averaging) pada piksel tetangga. 
+* Domain Frekuensi: Meloloskan komponen frekuensi rendah (area dengan perubahan intensitas lambat seperti background) dan membuang frekuensi tinggi (perubahan intensitas cepat seperti noise dan tepi objek). 
+2. High Pass Filter (HPF):
+* Domain Spasial: Menghitung perbedaan (selisih) yang tajam antar piksel bertetangga. 
+* Domain Frekuensi: Meloloskan komponen frekuensi tinggi (tepi objek, detail halus, dan noise) serta membuang atau menekan frekuensi rendah (area yang rata/konstan). 
+3. Band Pass Filter (BPF):
+* Domain Spasial: Merupakan kombinasi yang memperkuat detail tertentu sambil menekan frekuensi yang tidak diinginkan. 
+* Domain Frekuensi: Meloloskan komponen pada rentang frekuensi tertentu (pita frekuensi). Dalam konteks penajaman (sharpening), filter ini memperkuat komponen frekuensi tinggi tanpa menghilangkan seluruh komponen frekuensi rendah, sehingga struktur gambar tetap terlihat. 
+
